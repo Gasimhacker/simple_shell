@@ -411,4 +411,32 @@ void cmd_not_found_msg(char *shell_name, char *cmd);
  */
 void wrong_exit_code_msg(char *shell_name, char *exit_code);
 
+/**
+ * check_separator - Searh a buffer for some seprator 
+ * @buff: Buffer to be searched for a seprator
+ * Return: Returns the seperator
+ */
+int check_separator(char *buff);
+
+/**
+ * handle_anding - handles and Executes the command seperated by '&&'
+ * @commands: List of command to be separated
+ * Return: void
+ */
+void handle_anding(char **commands);
+
+/**
+ * handle_oring - handles and Executes the command seperated by '||'
+ * @commands: List of command to be separated
+ * Return: void
+ */
+void handle_oring(char **commands);
+
+/**
+ * handle_colon - handles and Executes the command seperated by ';'
+ * @commands: List of command to be separated
+ * Return: void
+ */
+void handle_colon(char **commands);
+
 #endif /* MAIN_H */
