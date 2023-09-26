@@ -449,4 +449,11 @@ void handle_colon(char **commands);
  */
 char *_strstr(char *haystack, char *needle);
 
+/**
+ * search_execute - Serach for the command and execute it if found
+ *
+ * Return: void
+ */
+void search_execute(char *command);
+
 #endif /* MAIN_H */
