@@ -9,7 +9,7 @@
  */
 int check_separator(char *buff, alias_t **head, char *shell_name)
 {
-    char **commands char **commands = malloc(256 * sizeof(char *));
+    char **commands = malloc(256 * sizeof(char *));
     if (_strstr(buff, ";"))
     {
         commands = split_string(buff, ";");

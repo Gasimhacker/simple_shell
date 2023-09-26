@@ -1,4 +1,4 @@
-#include "main2.h"
+#include "main.h"
 
 /**
  * _getlines - Super simple shell
