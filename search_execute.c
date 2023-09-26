@@ -2,9 +2,9 @@
 
 /**
  * search_execute - Serach for the command and execute it if found
- *@command: The command tobe executed
- *@head: The head of the linked list that needs to be freed
- *@shell_name: The name of the shell is used for printing error messages
+ * @command: The command tobe executed
+ * @head: The head of the linked list that needs to be freed
+ * @shell_name: The name of the shell is used for printing error messages
  *
  * Return: void
  */
@@ -12,7 +12,7 @@ void search_execute(char *command, alias_t **head, char *shell_name)
 {
 	char **args, *full_path;
 
-	args = create_args();
+	args = create_args(command);
 
 	if (args == NULL)
 		continue;

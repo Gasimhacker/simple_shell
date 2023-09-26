@@ -96,13 +96,13 @@ void search_comments(char **args)
 }
 
 /**
- * create_args - Create the arguments list
- *
+ * 'create_args' - Create the arguments list
+ * @buff: The buffer to be handled
  * Return: The arguments list
  */
-char **create_args(void)
+char **create_args(char *buff)
 {
-	char *buff = NULL, **args;
+	char **args;
 	size_t n;
 
 	if (getline(&buff, &n, stdin) == -1)
@@ -119,7 +119,6 @@ char **create_args(void)
 	{
 		search_cmd_expansion(args);
 	}
-	free(buff);
 
 	return (args);
 }

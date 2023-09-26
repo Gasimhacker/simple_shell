@@ -9,8 +9,6 @@
  */
 void run_interactive(alias_t **head, char *shell_name)
 {
-	char **args, *full_path;
-
 	char *buff = NULL;
     int is_seperator;
     size_t n;
@@ -27,7 +25,7 @@ void run_interactive(alias_t **head, char *shell_name)
         if (is_seperator)
             continue;
         else
-            search_execute(buff);
+            search_execute(buff,head,shell_name);
             
         free(buff);
 	}

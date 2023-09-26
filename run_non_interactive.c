@@ -10,28 +10,25 @@
  */
 void run_non_interactive(alias_t **head, char *shell_name)
 {
-	char *full_path, **args = NULL;
+	char *buff = NULL;
+    int is_seperator;
+    size_t n;
 
-	args = create_args();
-
-	if (args == NULL)
-		return;
-
-	if (search_builtins(head, shell_name, args[0], args))
+	while (1)
 	{
-		clean(args);
-		return;
+		write(STDOUT_FILENO, "$ ", 2);
+        
+	    if (getline(&buff, &n, stdin) == -1)
+		    exit(1);
+        
+        is_seperator = check_separator(buff);
+
+        if (is_seperator)
+            continue;
+        else
+            search_execute(buff);
+            
+        free(buff);
 	}
-
-	full_path = find_file(args[0]);
-
-	if (full_path == NULL)
-	{
-		cmd_not_found_msg(shell_name, args[0]);
-		clean(args);
-		exit(127);
-	}
-
-	execve(full_path, args, environ);
 }
 

@@ -316,22 +316,13 @@ void print_env(void);
 
 
 /* "Input proccessing" */
-/**
- * _getline - Get a line from a file and store it in *lineptr
- * @lineptr: A pointer to the buffer's address
- * @n: A pointer to the place of storing the number of the characters read
- * @stream: The file to read a line from
- *
- * Return: The number of characters read
- *	   On failure(EOF or SIGNINT) - -1
- */
-ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
+
 /**
  * create_args - Create the arguments list
- *
- * Return: An array of command's arguments
+ * @buff: The buffer to be handled
+ * Return: The arguments list
  */
-char **create_args(void);
+char **create_args(char *buff);
 /**
  * find_file - check if the file is in the current path
  * @file_name: The file name
@@ -411,6 +402,7 @@ void cmd_not_found_msg(char *shell_name, char *cmd);
  */
 void wrong_exit_code_msg(char *shell_name, char *exit_code);
 
+/*New Functions*/
 /**
  * check_separator - Searh a buffer for some seprator 
  * @buff: Buffer to be searched for a seprator
@@ -451,9 +443,12 @@ char *_strstr(char *haystack, char *needle);
 
 /**
  * search_execute - Serach for the command and execute it if found
+ *@command: The command tobe executed
+ *@head: The head of the linked list that needs to be freed
+ *@shell_name: The name of the shell is used for printing error messages
  *
  * Return: void
  */
-void search_execute(char *command);
+void search_execute(char *command, alias_t **head, char *shell_name);
 
 #endif /* MAIN_H */
