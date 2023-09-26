@@ -27,10 +27,10 @@ int check_separator(char *buff, alias_t **head, char *shell_name)
     }
     else
     {
-        Free(commands);
+        free(commands);
         return (0);
     }
-    Free(commands);
+    free(commands);
     return (1);
 }
 
