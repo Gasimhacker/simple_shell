@@ -19,6 +19,7 @@ void print_alias(const alias_t *alias)
 
 /**
  * print_specific_alias - Search for an alias and print it
+ * @head: The head of the linked list that needs to be freed
  * @alias: The alias to print
  *
  * Return: void

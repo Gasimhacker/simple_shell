@@ -2,6 +2,8 @@
 
 /**
  * main - Super simple shell
+ * @argc: The arguments count
+ * @argv: The arguments vector
  *
  * Return: Always 0.
  */

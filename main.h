@@ -56,6 +56,7 @@ alias_t *add_alias_end(alias_t **head, const char *name, const char *value);
 /**
  * search_alias - search if the alias is in the aliases list
  * @alias: The alias to find
+ * @head: The head of the linked list
  *
  * Return: If the alias is found - pointer to the alias
  *	   otherwise - NULL
@@ -64,6 +65,7 @@ alias_t *search_alias(alias_t **head, char *alias);
 /**
  * create_alias - Add the new alias to the aliases linked list
  * @alias: The alias to add
+ * @head: The head of the linked list
  *
  * Return: void
  */
@@ -78,12 +80,14 @@ void print_alias(const alias_t *alias);
 /**
  * print_specific_alias - Search for an alias and print it
  * @alias: The alias to print
+ * @head: A double pointer to the linked list to be freed
  *
  * Return: void
  */
 void print_specific_alias(alias_t **head, char *alias);
 /**
  * print_list - Print the data stored in the nodes of a linked list
+ * @h: A double pointer to the linked list to be freed
  *
  * Return: The number of nodes
  */
@@ -351,13 +355,16 @@ int execute(char **args, char *program_path);
 /**
  * search_builtins - Check if the command passed is a builtin
  *		     and if it is a builtin execute it
+ * @head: The head of the linked list that needs to be freed
+ * @shell_name: The name of the shell is used for printing error messages
  * @cmd_name: The name of the command
  * @args: The arguments list to pass to the handler functions
  *
  * Return: If builtin found - 1
  *	   Otherwise - 0
  */
-int search_builtins(alias_t **head, char *shell_name, char *cmd_name, char **args);
+int search_builtins(alias_t **head, char *shell_name,
+		char *cmd_name, char **args);
 /**
  * changeDirectory - Change the current directory
  * @newpwd: The path of the new Directory
@@ -369,7 +376,8 @@ void change_directory(const char *newpwd);
 /* "Shell modes" */
 /**
  * run_interactive - Execute the shell commands in the interactive mode
- * @argv: The arguments list containing the shell name
+ * @head: The head of the linked list that needs to be freed
+ * @shell_name: The name of the shell is used for printing error messages
  *
  * Return: void
  */
@@ -377,7 +385,8 @@ void run_interactive(alias_t **head, char *shell_name);
 /**
  * run_non_interactive - Execute the shell commands in
  *			 the non interactive mode
- * @argv: The arguments list containing the shell name
+ * @head: The head of the linked list that needs to be freed
+ * @shell_name: The name of the shell is used for printing error messages
  *
  * Return: void
  */

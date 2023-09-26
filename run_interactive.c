@@ -2,7 +2,8 @@
 
 /**
  * run_interactive - Execute the shell commands in the interactive mode
- * @argv: The arguments list containing the shell name
+ * @head: The head of the linked list that needs to be freed
+ * @shell_name: The name of the shell is used for printing error messages
  *
  * Return: void
  */

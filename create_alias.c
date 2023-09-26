@@ -2,6 +2,7 @@
 
 /**
  * search_alias - search if the alias is in the aliases list
+ * @head: The head of the linked list that needs to be freed
  * @alias: The alias to find
  *
  * Return: If the alias is found - pointer to the alias
@@ -22,6 +23,7 @@ alias_t *search_alias(alias_t **head, char *alias)
 
 /**
  * create_alias - Add the new alias to the aliases linked list
+ * @head: The head of the linked list that needs to be freed
  * @alias: The alias to add
  *
  * Return: void
