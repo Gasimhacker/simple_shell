@@ -9,7 +9,7 @@
  */
 int check_separator(char *buff, alias_t **head, char *shell_name)
 {
-    char **commands;
+    char **commands = NULL;
     if (_strstr(buff, ";"))
     {
         commands = split_string(buff, ";");
@@ -27,7 +27,8 @@ int check_separator(char *buff, alias_t **head, char *shell_name)
     }
     else
     {
-        free(commands);
+        if(commands)
+            free(commands);
         return (0);
     }
     free(commands);
@@ -47,14 +48,14 @@ void handle_anding(char **commands, alias_t **head, char *shell_name)
     int i = 0;
 
     search_execute(commands[i], head, shell_name);
-    Free(commands[i++]);
+    free(commands[i++]);
     while (commands[i])
     {
         last_exit_code = get_exit_status();
         if (*last_exit_code == EXIT_SUCCESS)
         {
             search_execute(commands[i], head, shell_name);
-            Free(commands[i++]);
+            free(commands[i++]);
         }
         else
             break;
@@ -74,7 +75,7 @@ void handle_oring(char **commands, alias_t **head, char *shell_name)
     int i = 0;
 
     search_execute(commands[i], head, shell_name);
-    Free(commands[i++]);
+    free(commands[i++]);
     while (commands[i])
     {
         last_exit_code = get_exit_status();
@@ -83,7 +84,7 @@ void handle_oring(char **commands, alias_t **head, char *shell_name)
         else
         {
             search_execute(commands[i], head, shell_name);
-            Free(commands[i++]);
+            free(commands[i++]);
         }
     }
 }
@@ -102,7 +103,7 @@ void handle_colon(char **commands, alias_t **head, char *shell_name)
     while (commands[i])
     {
         search_execute(commands[i], head, shell_name);
-        Free(commands[i++]);
+        free(commands[i++]);
     }
 }
 
