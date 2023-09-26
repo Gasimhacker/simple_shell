@@ -1,5 +1,7 @@
 #include "main.h"
 
+#define MAX_LINE_LENGTH 100
+
 /**
  * _getlines - Super simple shell
  * @commands: The list were commands will be stored
