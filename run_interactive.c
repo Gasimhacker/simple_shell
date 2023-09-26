@@ -9,7 +9,7 @@
  */
 void run_interactive(alias_t **head, char *shell_name)
 {
-	char *buff ;
+	char *buff = null;
     int is_seperator;
     size_t n;
 
