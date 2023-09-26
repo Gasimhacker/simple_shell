@@ -22,9 +22,7 @@ void run_interactive(alias_t **head, char *shell_name)
         
         is_seperator = check_separator(buff,head,shell_name);
 
-        if (is_seperator)
-            continue;
-        else
+        if (!is_seperator)
             search_execute(buff,head,shell_name);
             
         free(buff);
