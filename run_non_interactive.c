@@ -21,12 +21,12 @@ void run_non_interactive(alias_t **head, char *shell_name)
 	    if (getline(&buff, &n, stdin) == -1)
 		    exit(1);
         
-        is_seperator = check_separator(buff);
+        is_seperator = check_separator(buff,head,shell_name);
 
         if (is_seperator)
             continue;
         else
-            search_execute(buff);
+            search_execute(buff,head,shell_name);
             
         free(buff);
 	}

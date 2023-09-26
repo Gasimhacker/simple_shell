@@ -406,30 +406,38 @@ void wrong_exit_code_msg(char *shell_name, char *exit_code);
 /**
  * check_separator - Searh a buffer for some seprator 
  * @buff: Buffer to be searched for a seprator
+ * @head: The head of the linked list that needs to be freed
+ * @shell_name: The name of the shell is used for printing error messages
  * Return: Returns the seperator
  */
-int check_separator(char *buff);
+int check_separator(char *buff, alias_t **head, char *shell_name);
 
 /**
  * handle_anding - handles and Executes the command seperated by '&&'
  * @commands: List of command to be separated
+ * @head: The head of the linked list that needs to be freed
+ * @shell_name: The name of the shell is used for printing error messages
  * Return: void
  */
-void handle_anding(char **commands);
+void handle_anding(char **commands, alias_t **head, char *shell_name);
 
 /**
  * handle_oring - handles and Executes the command seperated by '||'
  * @commands: List of command to be separated
+ * @head: The head of the linked list that needs to be freed
+ * @shell_name: The name of the shell is used for printing error messages
  * Return: void
  */
-void handle_oring(char **commands);
+void handle_oring(char **commands, alias_t **head, char *shell_name);
 
 /**
  * handle_colon - handles and Executes the command seperated by ';'
  * @commands: List of command to be separated
+ * @head: The head of the linked list that needs to be freed
+ * @shell_name: The name of the shell is used for printing error messages
  * Return: void
  */
-void handle_colon(char **commands);
+void handle_colon(char **commands,alias_t **head, char *shell_name);
 
 /**
  * _strstr - Locate a substring

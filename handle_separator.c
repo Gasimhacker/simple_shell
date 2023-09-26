@@ -3,25 +3,27 @@
 /**
  * check_separator - Searh a buffer for some seprator 
  * @buff: Buffer to be searched for a seprator
+ * @head: The head of the linked list that needs to be freed
+ * @shell_name: The name of the shell is used for printing error messages
  * Return: Returns the seperator
  */
-int check_separator(char *buff)
+int check_separator(char *buff, alias_t **head, char *shell_name)
 {
     char **commands;
     if (_strstr(buff,";"))
     {
         commands = split_string(buff,";");
-        handle_colon(commands);
+        handle_colon(commands,head,shell_name);
     }
     else if (_strstr(buff,"&&"))
     {
         commands = split_string(buff,"&&");
-        handle_anding(commands);
+        handle_anding(commands,head,shell_name);
     }
     else if (_strstr(buff,"||"))
     {
         commands = split_string(buff,"||");
-        handle_oring(commands);
+        handle_oring(commands,head,shell_name);
     }
     else
         return(0);
@@ -31,19 +33,21 @@ int check_separator(char *buff)
 /**
  * handle_anding - handles and Executes the command seperated by '&&'
  * @commands: List of command to be separated
+ * @head: The head of the linked list that needs to be freed
+ * @shell_name: The name of the shell is used for printing error messages
  * Return: void
  */
-void handle_anding(char **commands)
+void handle_anding(char **commands, alias_t **head, char *shell_name)
 {
     int *last_exit_code;
     int i = 0;
 
-    search_execute(commands[i++]);
+    search_execute(commands[i++],head,shell_name);
     while (commands[i])
     {
         last_exit_code = get_exit_status();
         if (*last_exit_code == EXIT_SUCCESS)
-            search_execute(commands[i++]);
+            search_execute(commands[i++],head,shell_name);
         else
             break;
     }
@@ -52,33 +56,39 @@ void handle_anding(char **commands)
 /**
  * handle_oring - handles and Executes the command seperated by '||'
  * @commands: List of command to be separated
+ * @head: The head of the linked list that needs to be freed
+ * @shell_name: The name of the shell is used for printing error messages
  * Return: void
  */
-void handle_oring(char **commands)
+void handle_oring(char **commands, alias_t **head, char *shell_name)
 {
     int *last_exit_code ;
     int i = 0;
-    search_execute(commands[i++]);
+
+    search_execute(commands[i++],head,shell_name);
     while (commands[i])
     {
         last_exit_code = get_exit_status();
         if (*last_exit_code == EXIT_SUCCESS)
             break;
         else
-            search_execute(commands[i++]);
+            search_execute(commands[i++],head,shell_name);
     }
 }
 
 /**
  * handle_colon - handles and Executes the command seperated by ';'
  * @commands: List of command to be separated
+ * @head: The head of the linked list that needs to be freed
+ * @shell_name: The name of the shell is used for printing error messages
  * Return: void
  */
-void handle_colon(char **commands)
+void handle_colon(char **commands,alias_t **head, char *shell_name)
 {
     int i = 0;
+
     while (commands[i])
-        search_execute(commands[i++]);
+        search_execute(commands[i++],head,shell_name);
 }
 
 /**
