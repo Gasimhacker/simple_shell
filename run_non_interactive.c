@@ -10,19 +10,22 @@
  */
 void run_non_interactive(alias_t **head, char *shell_name)
 {
-	char *buff = NULL;
-	int is_seperator;
-	size_t n;
+	char **commands = malloc(256 * sizeof(char *));
+	int is_seperator, lines_count, i;
 
-	write(STDOUT_FILENO, "$ ", 2);
+	lines_count = _getlines(commands);
+	if (lines_count != 0)
+	{
+		for(i = 0; i < lines_count; i++)
+		{
+			is_seperator = check_separator(commands[i], head, shell_name);
 
-	if (getline(&buff, &n, stdin) == -1)
-		exit(1);
+			if (!is_seperator)
+				search_execute(commands[i], head, shell_name);
 
-	is_seperator = check_separator(buff, head, shell_name);
+			free(commands[i]);
+		}
+	}
+	free(commands);
 
-	if (!is_seperator)
-		search_execute(buff, head, shell_name);
-
-	free(buff);
 }

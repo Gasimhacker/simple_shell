@@ -459,4 +459,12 @@ char *_strstr(char *haystack, char *needle);
  */
 void search_execute(char *command, alias_t **head, char *shell_name);
 
+/**
+ * _getlines - Super simple shell
+ * @commands: The list were commands will be stored
+ * @lines_count: An integer pointer to the number of lines/commands
+ * Return: Always number of commands
+ */
+int _getlines(char **commands);
+
 #endif /* MAIN_H */

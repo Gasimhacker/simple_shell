@@ -9,7 +9,7 @@
  */
 void run_interactive(alias_t **head, char *shell_name)
 {
-	char *buff = NULL;
+	char *buff ;
     int is_seperator;
     size_t n;
 
@@ -24,9 +24,8 @@ void run_interactive(alias_t **head, char *shell_name)
 
         if (!is_seperator)
             search_execute(buff,head,shell_name);
-            
-        free(buff);
 	}
+	free(buff);
 
 }
 
