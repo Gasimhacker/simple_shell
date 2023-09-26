@@ -78,7 +78,7 @@ void search_comments(char **args)
 
 	while (args[i])
 	{
-		if (_strcmp(args[i], "#") == 0)
+		if (_strcmp(args[i], "#") == 0 || _strchr(args[i], '#') == args[i])
 		{
 			free(args[i]);
 			args[i] = NULL;
@@ -110,7 +110,15 @@ char **create_args(void)
 
 	args = split_string(buff, " \n");
 	search_comments(args);
-	search_cmd_expansion(args);
+	if (args[0] == NULL)
+	{
+		free(args);
+		args = NULL;
+	}
+	else
+	{
+		search_cmd_expansion(args);
+	}
 	free(buff);
 
 	return (args);
