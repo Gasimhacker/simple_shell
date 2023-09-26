@@ -23,7 +23,6 @@ char *is_equal(char *environ_var, const char *name)
 	if (environ_var[i] == '=')
 		return (environ_var + i + 1);
 
-
 	return (NULL);
 }
 

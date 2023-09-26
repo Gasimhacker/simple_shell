@@ -5,9 +5,9 @@
  *
  * Return: A pointer to the head of the linked list
  */
-alias_t **get_head(void)
+alias_t *get_head(void)
 {
 	static alias_t *head;
 
-	return (&head);
+	return (head);
 }

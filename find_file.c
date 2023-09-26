@@ -16,10 +16,10 @@ char *find_file(char *file_name)
 	char **dir;
 	char *full_path;
 
-	if (file_name == NULL)
+	if (file_name == NULL || (path && _strcmp(path, "") == 0))
 		return (NULL);
 
-	if (stat(file_name, &st) == 0)
+	if (stat(file_name, &st) == 0 && _strchr(file_name, '/'))
 	{
 		full_path = _strdup(file_name);
 		return (full_path);
@@ -27,7 +27,7 @@ char *find_file(char *file_name)
 
 	dir = split_string(path, ":");
 
-	while (dir[i])
+	while (dir && dir[i])
 	{
 		full_path = cat_with_delimiter(dir[i], "/", file_name);
 		if (stat(full_path, &st) == 0)

@@ -23,11 +23,11 @@ void print_alias(const alias_t *alias)
  *
  * Return: void
  */
-void print_specific_alias(char *alias)
+void print_specific_alias(alias_t **head, char *alias)
 {
 	alias_t *alias_found;
 
-	alias_found = search_alias(alias);
+	alias_found = search_alias(head, alias);
 
 	if (alias_found)
 		print_alias(alias_found);
@@ -39,16 +39,16 @@ void print_specific_alias(char *alias)
  *
  * Return: The number of nodes
  */
-size_t print_aliases(const alias_t *h)
+size_t print_aliases(alias_t **h)
 {
 	size_t num_nodes = 0;
 
-	while (h)
+	while (*h)
 	{
-		print_alias(h);
+		print_alias(*h);
 
 		num_nodes++;
-		h = h->next;
+		*h = (*h)->next;
 	}
 
 	return (num_nodes);

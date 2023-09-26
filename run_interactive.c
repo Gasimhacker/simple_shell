@@ -2,10 +2,11 @@
 
 /**
  * run_interactive - Execute the shell commands in the interactive mode
+ * @argv: The arguments list containing the shell name
  *
  * Return: void
  */
-void run_interactive(void)
+void run_interactive(alias_t **head, char *shell_name)
 {
 	char **args, *full_path;
 
@@ -15,7 +16,10 @@ void run_interactive(void)
 
 		args = create_args();
 
-		if (search_builtins(args[0], args))
+		if (args == NULL)
+			continue;
+
+		if (search_builtins(head, shell_name, args[0], args))
 		{
 			clean(args);
 			continue;
@@ -25,8 +29,8 @@ void run_interactive(void)
 
 		if (full_path == NULL)
 		{
+			cmd_not_found_msg(shell_name, args[0]);
 			clean(args);
-			perror("Error");
 			continue;
 		}
 
