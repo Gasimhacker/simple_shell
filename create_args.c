@@ -103,8 +103,7 @@ void search_comments(char **args)
 char **create_args(char *buff)
 {
 	char **args;
-	size_t n;
-
+	
 	args = split_string(buff, " \n");
 	search_comments(args);
 	if (args[0] == NULL)
