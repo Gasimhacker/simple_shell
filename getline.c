@@ -5,7 +5,6 @@
 /**
  * _getlines - Super simple shell
  * @commands: The list were commands will be stored
- * @lines_count: An integer pointer to the number of lines/commands
  * Return: Always number of commands
  */
 int _getlines(char **commands)
