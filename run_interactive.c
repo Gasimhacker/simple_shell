@@ -9,9 +9,8 @@
  */
 void run_interactive(alias_t **head, char *shell_name)
 {
-	char *buff = NULL;
-	int is_seperator;
-	size_t n;
+	char **commands = malloc(256 * sizeof(char *));
+	int is_seperator, lines_count, i;
 
 	while (1)
 	{
@@ -32,5 +31,4 @@ void run_interactive(alias_t **head, char *shell_name)
 		}
 		free(commands);
 	}
-	free(buff);
 }
