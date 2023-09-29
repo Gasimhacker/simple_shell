@@ -5,45 +5,50 @@
 /**
  * _getlines - Super simple shell
  * @commands: The list were commands will be stored
- * Return: Always number of commands
+ *
+ * Return: On success - number of commands
+ *	   On error - "-1"
  */
 int _getlines(char **commands)
 {
-    char page[MAX_LINE_LENGTH];
-    ssize_t bytes_read;
-    char *trimmed_line, *end, *line;
-    char ch;
-    int j = 0, lines_count = 0, i;
+	char *line, page[MAX_LINE_LENGTH], ch, qoute;
+	ssize_t bytes_read;
+	int j = 0, cmd_count = 0, i = 0;
 
-    line = (char *)malloc(MAX_LINE_LENGTH * sizeof(page));
-    bytes_read = read(STDIN_FILENO, page, sizeof(page));
-    if (bytes_read <= 0)
-		exit(1);
-    page[bytes_read] = '\0';
-
-    for (i = 0; i < bytes_read; i++)
-    {
-        ch = page[i];
-        if (ch == '\n')
-        {
-            line[j] = '\0';
-            j = 0;
-            trimmed_line = line;
-            while (*trimmed_line && (*trimmed_line == ' ' || *trimmed_line == '\t'))
-                trimmed_line++;
-
-            end = trimmed_line + strlen(trimmed_line) - 1;
-            while (end > trimmed_line && (*end == ' ' || *end == '\t'))
-                end--;
-            *(end + 1) = '\0';
-            if (strlen(trimmed_line) == 0)
-                continue;
-            commands[lines_count] = strdup(trimmed_line);
-            (lines_count)++;
-        }
-        else
-            line[j++] = ch;
-    }
-    free(line);
-    return lines_count;
+	line = malloc(MAX_LINE_LENGTH * sizeof(page));
+	if (line == NULL)
+		return (-1);
+	bytes_read = read(STDIN_FILENO, page, sizeof(page));
+	if (bytes_read <= 0)
+		return (-1);
+	page[bytes_read] = '\0';
+	while (i < bytes_read)
+	{
+		ch = page[i++];
+		if (ch == '\"' || ch == '\'')
+		{
+			line[j++] = ch;
+			qoute = ch;
+			do {
+				ch = page[i++];
+				line[j++] = ch;
+			} while (ch != qoute);
+		}
+		else if (ch == '\n')
+		{
+			line[j++] = '\0';
+			commands[cmd_count] = _strdup(line);
+			j = 0;
+			(cmd_count)++;
+		}
+		else
+			line[j++] = ch;
+	}
+	if (cmd_count == 0)
+	{
+		commands[cmd_count] = _strdup(line);
+		cmd_count++;
+	}
+	free(line);
+	return (cmd_count);
 }
