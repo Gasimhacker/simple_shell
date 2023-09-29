@@ -121,10 +121,13 @@ char **split_string(const char *str, const char *delimiter)
 	if (str == NULL)
 		return (NULL);
 
+
 	words = malloc(sizeof(char *));
 
 	if (!words)
 		return (NULL);
+
+	words[0] = NULL;
 
 	while (token != NULL)
 	{

@@ -9,7 +9,7 @@
  */
 void run_interactive(alias_t **head, char *shell_name)
 {
-	char **commands = malloc(256 * sizeof(char *));
+	char **commands = malloc(265 * sizeof(char *));
 	int is_seperator, lines_count, i;
 
 	while (1)
@@ -26,9 +26,8 @@ void run_interactive(alias_t **head, char *shell_name)
 				if (!is_seperator)
 					search_execute(commands[i], head, shell_name);
 
-				free(commands[i]);
 			}
 		}
-		free(commands);
 	}
+		free(commands);
 }

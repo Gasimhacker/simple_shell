@@ -76,6 +76,7 @@ int search_builtins(alias_t **head, char *shell_name,
 
 	while (args[i])
 		i++;
+
 	if (_strcmp(cmd_name, "exit") == 0)
 		handle_exit(shell_name, head, i, args);
 

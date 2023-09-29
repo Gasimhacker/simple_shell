@@ -83,6 +83,9 @@ char *locate_delimiter(char *start, const char *delim)
 {
 	int i = 0, j = 0;
 
+	if (start == NULL)
+		return (NULL);
+
 	while (start[i])
 	{
 		if (start[i] == '\"' || start[i] == '\'')
@@ -108,6 +111,7 @@ char *locate_delimiter(char *start, const char *delim)
 				i++;
 		}
 	}
+
 	return (NULL);
 }
 
@@ -126,11 +130,19 @@ char *_strtok(char *str, const char *delim)
 	static char *start;
 
 	if (str != NULL)
+	{
 		str = locate_non_delimiter(str, delim);
+		if (str == NULL)
+			return (NULL);
+	}
 	else if (start != NULL)
+	{
 		str = start;
+	}
 	else
+	{
 		return (NULL);
+	}
 
 	start = locate_delimiter(str, delim);
 

@@ -31,13 +31,13 @@ char *_strdup(const char *str)
 	char *p;
 
 	if (str == NULL)
-		return (0);
+		return (NULL);
 
 	len = _strlen(str);
 
 	p = malloc((len + 1) * sizeof(char));
 
-	if (p == 0)
+	if (p == NULL)
 		return (p);
 
 	for (i = 0; i <= len; i++)

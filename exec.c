@@ -24,7 +24,6 @@ int execute(char **args, char *program_path)
 	{
 		if (execve(program_path, args, environ) == -1)
 		{
-			perror("Error");
 			clean(args);
 			free(program_path);
 			exit(1);
@@ -40,5 +39,5 @@ int execute(char **args, char *program_path)
 		free(program_path);
 		clean(args);
 	}
-	return (0);
+	return (*exit_status);
 }
