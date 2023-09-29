@@ -5,10 +5,11 @@
  * @argc: The arguments count
  * @argv: The arguments vector
  *
- * Return: Always 0.
+ * Return: Always the last exit status.
  */
 int main(int __attribute__((unused))argc, char **argv)
 {
+	int *exit_status = get_exit_status();
 	alias_t *head = NULL;
 
 	copy_to_heap();
@@ -20,5 +21,5 @@ int main(int __attribute__((unused))argc, char **argv)
 
 	clean(environ);
 
-	return (0);
+	return (*exit_status);
 }
